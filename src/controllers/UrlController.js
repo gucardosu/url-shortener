@@ -9,7 +9,7 @@ exports.shortenUrl = async (req, res) => {
         return res.status(400).json({ error: 'A URL original é obrigatória.' });
     }
 
-    // Validação básica da URL (opcional, mas recomendada)
+    
     try {
         new URL(originalUrl);
     } catch {
@@ -25,7 +25,7 @@ exports.shortenUrl = async (req, res) => {
 
         res.status(201).json({
             message: 'URL encurtada com sucesso!',
-            shortUrl: `http://localhost:3000/${shortCode}` // Corrigido: adicionada barra
+            shortUrl: `http://localhost:3000/${shortCode}` 
         });
     } catch (err) {
         console.error(err);
@@ -42,7 +42,7 @@ exports.redirectUrl = async (req, res) => {
         const result = await db.query(query, [code]);
 
         if (result.rows.length > 0) {
-            return res.redirect(result.rows[0].original_url); // Corrigido: propriedade em snake_case
+            return res.redirect(result.rows[0].original_url); 
         } else {
             return res.status(404).json({ error: 'URL não encontrada.' });
         }
